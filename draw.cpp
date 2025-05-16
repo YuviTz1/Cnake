@@ -2,19 +2,27 @@
 
 draw::draw(int width, int height)
 {
-  this->width = width;
-  this->height = height;
+  this->width = height;
+  this->height = width;
 
-  this->world = std::vector<std::vector<int>>(width, std::vector<int>(height));
+  this->world = std::vector<std::vector<char>>(this->width, std::vector<char>(this->height));
+
+  for(int i=0;i<this->width;i++)
+  {
+    for(int j=0;j<this->height;j++)
+    {
+      world[i][j] = ' ';
+    }
+  }
 }
 
 void draw::render()
 {
   for(int i=0;i<width;i++)
   {
-    for(int i=0;i<height;i++)
+    for(int j=0;j<height;j++)
     {
-      std::cout<<"*";
+      std::cout<<world[i][j];
     }
     std::cout<<std::endl;
   }

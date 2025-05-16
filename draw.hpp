@@ -7,8 +7,9 @@ class draw{
   private:
     int width;
     int height;
-    std::vector<std::vector<int>> world;
+
   public:
+    std::vector<std::vector<char>> world;
     draw(int width, int height);
 
     void render();
