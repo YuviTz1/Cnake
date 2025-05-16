@@ -13,5 +13,6 @@ class draw{
     draw(int width, int height);
 
     void render();
+    void clear_screen();
     
 };
