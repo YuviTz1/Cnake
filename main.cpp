@@ -1,11 +1,19 @@
 #include <iostream>
 #include <cstdlib>
 #include <unistd.h>
-#include "draw.hpp"
+#include <ncurses.h>
+#include "draw.hpp" 
 #include "snake.hpp"
 
 int main()
 {
+  initscr();
+  cbreak();
+  noecho();
+  curs_set(0);
+  nodelay(stdscr, TRUE);
+  keypad(stdscr, TRUE);
+
   draw game(35, 15);
   snake snek(1);
 
@@ -14,8 +22,9 @@ int main()
   {
     snek.render(game.world);
     game.render();
-    sleep(0.75);
-    system("clear");      //clear the terminal
+    sleep(1);
+    //system("clear");      //clear the terminal
+    game.clear_screen();
   }
 
 }

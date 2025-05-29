@@ -15,10 +15,12 @@ void draw::render()
   {
     for(int j=0;j<height;j++)
     {
-      std::cout<<world[i][j];
+      //std::cout<<world[i][j];
+      mvaddch(i,j,world[i][j]);
     }
-    std::cout<<std::endl;
+    //std::cout<<std::endl;
   }
+  refresh();
 }
 
 void draw::clear_screen()
@@ -27,7 +29,7 @@ void draw::clear_screen()
   {
     for(int j=0;j<height;j++)
     {
-      world[i][j]= ' ';
+      world[i][j]= '*';
     }
   }
 }
