@@ -19,7 +19,7 @@ class snake
 {
   private:
     int length;
-    bool mouth_anim_trigger;
+    bool mouth_anim_trigger = true;
     std::atomic<directions> move_dir{directions::NONE};
     std::thread input_thread;
   public:

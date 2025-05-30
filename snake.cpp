@@ -29,7 +29,22 @@ void snake::render(std::vector<std::vector<char>> &world)
 
 void snake::update()
 {
-
+  if(move_dir.load() == directions::LEFT)
+  {
+    body[0].second -=1;
+  }
+  else if(move_dir.load() == directions::RIGHT)
+  {
+    body[0].second +=1;
+  }
+  else if(move_dir.load() == directions::UP)
+  {
+    body[0].first -=1;
+  }
+  else if(move_dir.load() == directions::DOWN)
+  {
+    body[0].first +=1;
+  }
 }
 
 void snake::read_input()
@@ -41,16 +56,26 @@ void snake::read_input()
     switch(user_input)
     {
       case 'a':
-        move_dir.store(directions::LEFT);
+        if(move_dir.load() != directions::RIGHT) // prevent reversing direction
+          move_dir.store(directions::LEFT);
         break;
       case 'd':
-        move_dir.store(directions::RIGHT);
+        if(move_dir.load() != directions::LEFT) // prevent reversing direction
+          move_dir.store(directions::RIGHT);
+        break;
+      case 'w':
+        if(move_dir.load() != directions::DOWN) // prevent reversing direction
+          move_dir.store(directions::UP);
+        break;
+      case 's':
+        if(move_dir.load() != directions::UP) // prevent reversing direction
+          move_dir.store(directions::DOWN);
         break;
       case 'q':
         running = false;
         break;
       default:
-        move_dir.store(directions::NONE);
+        move_dir.store(move_dir.load());  // keep the current direction
         break;
     }
     std::this_thread::sleep_for(std::chrono::milliseconds(10));

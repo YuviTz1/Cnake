@@ -22,9 +22,10 @@ int main()
   {
     snek.render(game.world);
     game.render();
-    sleep(1);
+    sleep(0.7);
     //system("clear");      //clear the terminal
     game.clear_screen();
+    snek.update();
   }
   endwin();
 }
