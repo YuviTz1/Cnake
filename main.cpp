@@ -18,7 +18,7 @@ int main()
   snake snek(1);
 
   //main game loop
-  while(true)
+  while(snek.running)
   {
     snek.render(game.world);
     game.render();
@@ -26,5 +26,5 @@ int main()
     //system("clear");      //clear the terminal
     game.clear_screen();
   }
-
+  endwin();
 }

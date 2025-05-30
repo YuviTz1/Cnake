@@ -5,6 +5,7 @@ snake::snake(int length)
   this->length = length;
   this->body = std::vector<std::pair<int,int>>(1);
   body[0] = std::pair<int,int>(7,15);
+  input_thread = std::thread(&snake::read_input, this);
 }
 
 void snake::render(std::vector<std::vector<char>> &world)
@@ -34,7 +35,7 @@ void snake::update()
 void snake::read_input()
 {
   char user_input;
-  while(true)
+  while(running)
   {
     user_input = getch();
     switch(user_input)
@@ -45,9 +46,19 @@ void snake::read_input()
       case 'd':
         move_dir.store(directions::RIGHT);
         break;
+      case 'q':
+        running = false;
+        break;
       default:
         move_dir.store(directions::NONE);
         break;
     }
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
   }
+}
+
+snake::~snake()
+{
+  if(input_thread.joinable())
+    input_thread.join();
 }
