@@ -11,6 +11,7 @@ draw::draw(int width, int height)
 
 void draw::render()
 {
+  std::lock_guard<std::mutex> lock(terminal_mutex); // Lock the mutex
   for(int i=0;i<width;i++)
   {
     for(int j=0;j<height;j++)

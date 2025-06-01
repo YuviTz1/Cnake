@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <ncurses.h>
+#include "shared_mutex.hpp"
 
 class draw{
   private:

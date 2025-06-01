@@ -4,6 +4,9 @@
 #include <ncurses.h>
 #include "draw.hpp" 
 #include "snake.hpp"
+#include "shared_mutex.hpp"
+
+std::mutex terminal_mutex;
 
 int main()
 {
@@ -22,7 +25,7 @@ int main()
   {
     snek.render(game.world);
     game.render();
-    sleep(0.7);
+    std::this_thread::sleep_for(std::chrono::milliseconds(700));
     //system("clear");      //clear the terminal
     game.clear_screen();
     snek.update();

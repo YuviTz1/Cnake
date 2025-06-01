@@ -6,6 +6,7 @@
 #include <atomic>
 #include <ncurses.h>
 #include "draw.hpp"
+#include "shared_mutex.hpp"
 
 enum class directions {
   NONE,

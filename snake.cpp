@@ -52,31 +52,37 @@ void snake::read_input()
   char user_input;
   while(running)
   {
-    user_input = getch();
-    switch(user_input)
     {
-      case 'a':
-        if(move_dir.load() != directions::RIGHT) // prevent reversing direction
-          move_dir.store(directions::LEFT);
-        break;
-      case 'd':
-        if(move_dir.load() != directions::LEFT) // prevent reversing direction
-          move_dir.store(directions::RIGHT);
-        break;
-      case 'w':
-        if(move_dir.load() != directions::DOWN) // prevent reversing direction
-          move_dir.store(directions::UP);
-        break;
-      case 's':
-        if(move_dir.load() != directions::UP) // prevent reversing direction
-          move_dir.store(directions::DOWN);
-        break;
-      case 'q':
-        running = false;
-        break;
-      default:
-        move_dir.store(move_dir.load());  // keep the current direction
-        break;
+      std::lock_guard<std::mutex> lock(terminal_mutex); // Lock the mutex
+      user_input = getch();
+    }
+    if (user_input != ERR)
+    {
+      switch(user_input)
+      {
+        case 'a':
+          if(move_dir.load() != directions::RIGHT) // prevent reversing direction
+            move_dir.store(directions::LEFT);
+          break;
+        case 'd':
+          if(move_dir.load() != directions::LEFT) // prevent reversing direction
+            move_dir.store(directions::RIGHT);
+          break;
+        case 'w':
+          if(move_dir.load() != directions::DOWN) // prevent reversing direction
+            move_dir.store(directions::UP);
+          break;
+        case 's':
+          if(move_dir.load() != directions::UP) // prevent reversing direction
+            move_dir.store(directions::DOWN);
+          break;
+        case 'q':
+          running = false;
+          break;
+        default:
+          move_dir.store(move_dir.load());  // keep the current direction
+          break;
+      }
     }
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
   }
