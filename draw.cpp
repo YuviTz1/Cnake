@@ -30,7 +30,7 @@ void draw::clear_screen()
   {
     for(int j=0;j<height;j++)
     {
-      world[i][j]= '*';
+      world[i][j]= ' ';
     }
   }
 }
