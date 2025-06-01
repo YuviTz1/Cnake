@@ -30,7 +30,7 @@ class snake
     snake(int length);
     ~snake();
     void render(std::vector<std::vector<char>> &world);
-    void update();
+    void update(std::vector<std::vector<char>> &world);
     void read_input();
 
     //implement destructor

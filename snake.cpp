@@ -27,7 +27,7 @@ void snake::render(std::vector<std::vector<char>> &world)
   }
 }
 
-void snake::update()
+void snake::update(std::vector<std::vector<char>> &world)
 {
   if(move_dir.load() == directions::LEFT)
   {
@@ -44,6 +44,41 @@ void snake::update()
   else if(move_dir.load() == directions::DOWN)
   {
     body[0].first +=1;
+  }
+
+  // Move the body segments to follow the head
+  for (int i = body.size() - 1; i > 0; i--)
+  {
+    body[i] = body[i - 1];
+  }
+
+  //check for collision with self
+  for (int i = 1; i < body.size(); ++i)
+  {
+    if (body[0] == body[i])
+    {
+      running = false; // End the game
+      break;
+    }
+  }
+
+  //wrap around the screen
+  if (body[0].first < 0)
+  {
+    body[0].first = world.size() - 1;
+  }
+  else if (body[0].first >= world.size())
+  {
+    body[0].first = 0;
+  }
+
+  if (body[0].second < 0)
+  {
+    body[0].second = world[0].size() - 1;
+  }
+  else if (body[0].second >= world[0].size())
+  {
+    body[0].second = 0;
   }
 }
 

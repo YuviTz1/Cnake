@@ -28,7 +28,7 @@ int main()
     std::this_thread::sleep_for(std::chrono::milliseconds(700));
     //system("clear");      //clear the terminal
     game.clear_screen();
-    snek.update();
+    snek.update(game.world);
   }
   endwin();
 }
