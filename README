@@ -1,0 +1,13 @@
+# Cnake
+
+Cnake is a simple Snake game implemented in C++ using the ncurses library for terminal-based graphics.
+
+## Dependencies
+
+This project requires the `ncurses` library to be installed on your system.
+
+## Running the game
+
+Compile and run the game using the following command
+
+`g++ main.cpp snake.cpp draw.cpp -lncurses -pthread && ./a.out`
