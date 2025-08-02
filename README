@@ -11,3 +11,7 @@ This project requires the `ncurses` library to be installed on your system.
 Compile and run the game using the following command
 
 `g++ main.cpp snake.cpp draw.cpp -lncurses -pthread && ./a.out`
+
+Gameplay:
+
+![gameplay](https://github.com/YuviTz1/Cnake/blob/master/gameplay.gif)
